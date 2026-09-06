@@ -1,0 +1,30 @@
+/* Design tokens — dark (default) + light */
+:root {
+  --bg: #0F172A;
+  --panel: #111827;
+  --elevated: #1E293B;
+  --border: #2a3650;
+  --text: #E2E8F0;
+  --text-dim: #94A3B8;
+  --accent: #2563EB;
+  --accent-2: #7C3AED;
+  --success: #22C55E;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --radius: 10px;
+  --sidebar-w: 232px;
+  --rightpanel-w: 340px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+[data-theme="light"] {
+  --bg: #F1F5F9;
+  --panel: #FFFFFF;
+  --elevated: #E2E8F0;
+  --border: #CBD5E1;
+  --text: #0F172A;
+  --text-dim: #475569;
+  --accent: #2563EB;
+  --accent-2: #7C3AED;
+}

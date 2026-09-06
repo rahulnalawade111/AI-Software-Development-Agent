@@ -1,0 +1,9 @@
+.tools/
+node_modules/
+dist/
+target/
+storage/
+*.log
+.env
+.idea/
+.DS_Store
