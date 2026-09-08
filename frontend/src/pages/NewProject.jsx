@@ -21,11 +21,11 @@ export default function NewProject() {
     setBusy(true);
     setError('');
     try {
-      const { createProject } = await import('../lib/api.js');
-      const p = await createProject({ name, description, techStack: tech, aiModel });
-      navigate(`/project/${p.id}`);
+      const { api } = await import('../auth/AuthContext.jsx');
+      const res = await api.post('/projects', { name, description, techStack: tech, aiModel });
+      navigate(`/project/${res.data.id}`);
     } catch (err) {
-      setError(err.response?.data?.message || 'Could not create project (backend projects API arrives in Phase 2).');
+      setError(err.response?.data?.message || 'Could not create project.');
       setBusy(false);
     }
   }
