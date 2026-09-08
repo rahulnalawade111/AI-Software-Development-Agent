@@ -31,6 +31,11 @@ public class FileService {
     public record SearchResult(String path, int line, String text) {}
     public record WriteResult(String path, boolean created, long size) {}
 
+    /** True when the relative path exists (file or directory) inside the project workspace. */
+    public boolean exists(Long projectId, String relPath) {
+        return Files.exists(workspaceService.resolveAndValidate(projectId, relPath));
+    }
+
     public FileContent read(Long projectId, String relPath) {
         Path path = workspaceService.resolveAndValidate(projectId, relPath);
         if (!Files.isRegularFile(path)) {

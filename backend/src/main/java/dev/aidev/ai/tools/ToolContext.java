@@ -20,10 +20,9 @@ public class ToolContext {
                        Consumer<Object> eventSink) {
         this.projectId = projectId;
         this.conversationId = conversationId;
-        this.userId = principal != null ? principal.getUserId() : null;
-        this.userName = principal != null ? principal.getUsername() : null;
-        this.superAdmin = principal != null && principal.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_SUPER_ADMIN"));
+        this.userId = principal != null ? principal.userId() : null;
+        this.userName = principal != null ? principal.email() : null;
+        this.superAdmin = principal != null && "SUPER_ADMIN".equals(principal.role());
         this.eventSink = eventSink;
         this.emit = null;
     }

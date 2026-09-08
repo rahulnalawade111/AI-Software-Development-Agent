@@ -33,6 +33,10 @@ app:
     expiration-ms: 86400000
   workspace:
     root: ${WORKSPACE_ROOT:/workspace/storage/projects}
+  llm:
+    base-url: ${OPENAI_BASE_URL:https://llm.drytis.ai/v1}
+    api-key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_MODEL:z-ai/glm-5.3}
 
 logging:
   level:

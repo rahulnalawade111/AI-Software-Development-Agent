@@ -27,6 +27,12 @@ public interface AiTool {
     default boolean requiresApproval() { return false; }
 
     /**
+     * Per-call approval decision (e.g. database_query approves only write SQL,
+     * run_command only non-read-only commands). Defaults to the static flag.
+     */
+    default boolean requiresApproval(java.util.Map<String, Object> args) { return requiresApproval(); }
+
+    /**
      * Execute the tool. Args are already JSON-parsed. Returns a JSON-serializable
      * result object that will be given back to the model as the tool output.
      */

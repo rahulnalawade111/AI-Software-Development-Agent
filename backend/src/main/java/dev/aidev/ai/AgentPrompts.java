@@ -1,5 +1,7 @@
 package dev.aidev.ai;
 
+import java.util.List;
+
 /**
  * Prompt templates for the agent loop.
  */
