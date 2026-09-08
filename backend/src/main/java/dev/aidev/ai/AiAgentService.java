@@ -56,10 +56,20 @@ public class AiAgentService {
     private final ToolRegistry toolRegistry;
     private final AgentEventBus eventBus;
     private final ProjectService projectService;
+    private final dev.aidev.workspace.WorkspaceService workspaceService;
     private final AiConversationRepository conversations;
     private final AiMessageRepository messages;
     private final AiActionRepository actions;
     private final ObjectMapper mapper = new ObjectMapper();
+
+    @org.springframework.beans.factory.annotation.Value("${app.projects.database-url-template:jdbc:mysql://localhost:3306/}")
+    private String jdbcUrlTemplate;
+
+    @org.springframework.beans.factory.annotation.Value("${app.projects.database-user:}")
+    private String projectDbUser;
+
+    @org.springframework.beans.factory.annotation.Value("${app.projects.database-password:}")
+    private String projectDbPassword;
 
     private final ExecutorService executor = Executors.newCachedThreadPool();
 
@@ -74,6 +84,7 @@ public class AiAgentService {
                           ToolRegistry toolRegistry,
                           AgentEventBus eventBus,
                           ProjectService projectService,
+                          dev.aidev.workspace.WorkspaceService workspaceService,
                           AiConversationRepository conversations,
                           AiMessageRepository messages,
                           AiActionRepository actions) {
@@ -81,10 +92,20 @@ public class AiAgentService {
         this.toolRegistry = toolRegistry;
         this.eventBus = eventBus;
         this.projectService = projectService;
+        this.workspaceService = workspaceService;
         this.conversations = conversations;
         this.messages = messages;
         this.actions = actions;
     }
+
+    private String jdbcUrlFor(Long projectId) {
+        return jdbcUrlTemplate.endsWith("/")
+                ? jdbcUrlTemplate + "proj_" + projectId
+                : jdbcUrlTemplate + "/proj_" + projectId;
+    }
+
+    private String dbUserFor(Long projectId) { return projectDbUser; }
+    private String dbPasswordFor(Long projectId) { return projectDbPassword; }
 
     @PreDestroy
     void shutdown() {
@@ -307,7 +328,12 @@ public class AiAgentService {
                 event -> {
                     eventBus.publish(conversationId, "tool_event", event);
                     trySend(emitter, "tool_event", event);
-                });
+                })
+                .withWorkspace(
+                        workspaceService.projectDir(projectId).toString(),
+                        jdbcUrlFor(projectId),
+                        dbUserFor(projectId),
+                        dbPasswordFor(projectId));
 
         String resultJson;
         try {

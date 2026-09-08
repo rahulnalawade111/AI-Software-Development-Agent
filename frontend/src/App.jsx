@@ -8,6 +8,7 @@ import NewProject from './pages/NewProject.jsx';
 import Templates from './pages/Templates.jsx';
 import Settings from './pages/Settings.jsx';
 import ProjectWorkspace from './pages/ProjectWorkspace.jsx';
+import AdminConsole from './pages/AdminConsole.jsx';
 
 function RequireAuth({ children }) {
   const { user, loading } = useAuth();
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/project/:id" element={<ProjectWorkspace />} />
           <Route path="/templates" element={<Templates />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/admin" element={<AdminConsole />} />
         </Route>
         <Route path="*" element={<Navigate to="/projects" replace />} />
       </Routes>

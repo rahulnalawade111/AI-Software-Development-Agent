@@ -1,0 +1,21 @@
+{
+  "preview_url": "https://ai-software-developm-9dnvaz.drytis.dev/",
+  "accounts": [
+    {
+      "role": "SUPER_ADMIN",
+      "email": "admin@aidev.local",
+      "password": "Admin#12345",
+      "verified_at": "2026-09-08T18:20:00Z",
+      "verified_by": "leader",
+      "notes": "seeded by DataSeeder; login verified via /api/auth/login (token len 264)"
+    },
+    {
+      "role": "USER",
+      "email": "user@aidev.local",
+      "password": "User#12345",
+      "verified_at": "2026-09-08T18:20:00Z",
+      "verified_by": "leader",
+      "notes": "seeded by DataSeeder"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Registry of running preview processes per project. Static singleton
  * (not a Spring bean) so tools and controllers share one instance.
  */
+@org.springframework.stereotype.Component
 public final class PreviewRegistry {
 
     private static final PreviewRegistry INSTANCE = new PreviewRegistry();
@@ -15,7 +16,7 @@ public final class PreviewRegistry {
     private final Map<Long, Process> processes = new ConcurrentHashMap<>();
     private final Map<Long, Integer> ports = new ConcurrentHashMap<>();
 
-    private PreviewRegistry() {}
+    PreviewRegistry() {}  // package-private: Spring uses instance(), others too
 
     public static PreviewRegistry instance() { return INSTANCE; }
 

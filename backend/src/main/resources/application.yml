@@ -37,6 +37,10 @@ app:
     base-url: ${OPENAI_BASE_URL:https://llm.drytis.ai/v1}
     api-key: ${OPENAI_API_KEY:}
     model: ${OPENAI_MODEL:z-ai/glm-5.3}
+  projects:
+    database-url-template: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/
+    database-user: ${DB_USER:}
+    database-password: ${DB_PASSWORD:}
 
 logging:
   level:

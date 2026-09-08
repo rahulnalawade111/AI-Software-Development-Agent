@@ -37,6 +37,14 @@ export default function AppShell({ children }) {
               {!collapsed && <span>{item.label}</span>}
             </NavLink>
           ))}
+          {isAdmin(user) && !collapsed && (
+            <div className="recent-group">
+              <div className="recent-label">Administration</div>
+              <NavLink to="/admin" className="nav-item recent-item">
+                <span className="nav-icon">🛡</span><span className="recent-name">Super Admin</span>
+              </NavLink>
+            </div>
+          )}
           {!collapsed && recent.length > 0 && (
             <div className="recent-group">
               <div className="recent-label">Recent Projects</div>
